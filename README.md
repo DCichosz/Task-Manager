@@ -1,4 +1,4 @@
-Task Manager (Console)
+#Task Manager (Console)
 
 Simple Task Manager written in C# that supports:
 
