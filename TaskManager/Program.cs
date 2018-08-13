@@ -5,9 +5,9 @@ namespace TaskManager
 {
     class Program
     {
-        public static List<TaskModel> lista = new List<TaskModel>();
+        public static List<TaskModel> list = new List<TaskModel>();
         /// <summary>
-        /// Menu wyboru polecenia
+        /// Menu with commands
         /// </summary>
         static void Main(string[] args)
         {
@@ -15,47 +15,47 @@ namespace TaskManager
             string command;
             do
             {
-                ConsoleEx.WriteLine("Lista dostępnych komend to:\n1. Dodaj zadanie\n2. Usuń zadanie \n3. Wyświetl zadania\n4. Zapisz do pliku\n5. Wczytaj z pliku\n6. Wyjście", ConsoleColor.DarkYellow);
+                ConsoleEx.WriteLine("List of avaiable commands:\n1. Add task\n2. Delete task\n3. Show tasks\n4. Save to file\n5. Load from file\n6. Exit", ConsoleColor.DarkYellow);
                 command = Console.ReadLine().ToLower();
-                if (command == "dodaj" || command == "1")
+                if (command == "add" || command == "1")
                 {
                     Console.Clear();
-                    lista.Add(choice.AddTask());
+                    list.Add(choice.AddTask());
                     Console.ReadKey();
                     Console.Clear();
 
                 }
 
-                if (command == "usuń" || command == "usun" || command == "2")
+                if (command == "delete" || command == "2")
                 {
                     Console.Clear();
-                    Console.Write("Które zadanie chcesz usunąć? ");
-                    choice.ShowTasks(lista);
-                    choice.DeleteTask(lista);
+                    Console.Write("Which task do you want to delete? ");
+                    choice.ShowTasks(list);
+                    choice.DeleteTask(list);
                     Console.ReadKey();
                     Console.Clear();
                 }
 
-                if (command == "wyświetl" || command == "3")
+                if (command == "show" || command == "3")
                 {
                     Console.Clear();
-                    choice.ShowTasks(lista);
+                    choice.ShowTasks(list);
                     Console.ReadKey();
                     Console.Clear();
                 }
 
-                if (command == "zapisz" || command == "4")
+                if (command == "save" || command == "4")
                 {
                     Console.Clear();
-                    choice.SaveTasks(lista);
+                    choice.SaveTasks(list);
                     Console.ReadKey();
                     Console.Clear();
                 }
 
-                if (command == "wczytaj" || command == "5")
+                if (command == "load" || command == "5")
                 {
                     Console.Clear();
-                    lista=choice.LoadTasks();
+                    list=choice.LoadTasks();
                     Console.ReadKey();
                     Console.Clear();
                 }
@@ -63,7 +63,7 @@ namespace TaskManager
 
 
 
-            } while (command != "wyjście" && command != "6");
+            } while (command != "exit" && command != "6");
 
 
 

@@ -8,17 +8,17 @@ namespace TaskManager
 {
     public class TaskModel
     {
-        public string Opis;
+        public string Description;
         public DateTime Start;
-        public DateTime? Koniec;
+        public DateTime? End;
         public bool Allday;
         public bool Important;
 
-        public TaskModel(string opis, DateTime start, DateTime? koniec, bool allday, bool important)
+        public TaskModel(string description, DateTime start, DateTime? end, bool allday, bool important)
         {
-            Opis = opis;
+            Description = description;
             Start = start;
-            Koniec = koniec;
+            End = end;
             Allday = allday;
             Important = important;
         }
@@ -29,9 +29,9 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Dodanie zadania do modelu TaskModel
+        /// Adding task to TaskModel
         /// </summary>
-        /// <returns> zwrotka obiektu TaskModel </returns>
+        /// <returns> return TaskModel object </returns>
         public TaskModel AddTask()
         {
             bool validation = false;
@@ -39,29 +39,29 @@ namespace TaskManager
             {
                 try
                 {
-                    ConsoleEx.WriteLine("Wpisz opis wydarzenia: ", ConsoleColor.Blue);
-                    Opis = Console.ReadLine();
-                    ConsoleEx.WriteLine("Wpisz datę rozpoczęcia(rok-miesiąc-dzień): ", ConsoleColor.Yellow);
+                    ConsoleEx.WriteLine("Task's describtion: ", ConsoleColor.Blue);
+                    Description = Console.ReadLine();
+                    ConsoleEx.WriteLine("Start date(year-month-day): ", ConsoleColor.Yellow);
                     Start = Convert.ToDateTime(Console.ReadLine());
-                    ConsoleEx.WriteLine("Całodniowe? [tak/nie]", ConsoleColor.Cyan);
+                    ConsoleEx.WriteLine("Allday? [yes/no]", ConsoleColor.Cyan);
                     string allDay = Console.ReadLine();
 
-                    if (allDay == "nie" || allDay == "")
+                    if (allDay == "no" || allDay == "")
                     {
                         Allday = false;
-                        ConsoleEx.WriteLine("Wpisz datę zakończenia(rok-miesiąc-dzień", ConsoleColor.DarkYellow);
-                        Koniec = Convert.ToDateTime(Console.ReadLine());
+                        ConsoleEx.WriteLine("End date(year-month-day", ConsoleColor.DarkYellow);
+                        End = Convert.ToDateTime(Console.ReadLine());
                     }
 
-                    if (allDay == "tak")
+                    if (allDay == "yes")
                     {
                         Allday = true;
-                        Koniec = null;
+                        End = null;
                     }
 
-                    ConsoleEx.WriteLine("Priorytetowe? [tak/nie]", ConsoleColor.DarkRed);
+                    ConsoleEx.WriteLine("Important? [yes/no]", ConsoleColor.DarkRed);
                     string important = Console.ReadLine();
-                    if (important == "nie" || important == "")
+                    if (important == "no" || important == "")
                     {
                         Important = false;
                     }
@@ -80,14 +80,14 @@ namespace TaskManager
 
             } while (validation == false);
 
-            TaskModel task = new TaskModel(Opis, Start, Koniec, Allday, Important);
-            ConsoleEx.WriteLine("Pomyślnie dodano wpis", ConsoleColor.Green);
+            TaskModel task = new TaskModel(Description, Start, End, Allday, Important);
+            ConsoleEx.WriteLine("Successfully added", ConsoleColor.Green);
             return task;
         }
         /// <summary>
-        /// Wywołanie w konsoli listy zadań
+        /// Display task list in console
         /// </summary>
-        /// <param name="list">Parametrem metody jest lista modelu TaskModel </param>
+        /// <param name="list">TaskModel list</param>
         public void ShowTasks(List<TaskModel> list)
         {
             try
@@ -98,23 +98,23 @@ namespace TaskManager
                     if (element.Allday == true)
                     {
                         ConsoleEx.Write(
-                            $"{i + 1}. Opis: {element.Opis}, Data rozpoczęcia: {element.Start}, Całodniowe: Tak, ",
+                            $"{i + 1}. Describtion: {element.Description}, Start date: {element.Start}, Allday: True, ",
                             ConsoleColor.Magenta);
                     }
                     else
                     {
                         ConsoleEx.Write(
-                            $"{i + 1}. Opis: {element.Opis}, Data rozpoczęcia: {element.Start}, Data zakończenia: {element.Koniec}, ",
+                            $"{i + 1}. Describtion: {element.Description}, Start date: {element.Start}, End date: {element.End}, ",
                             ConsoleColor.Magenta);
                     }
 
                     if (element.Important == true)
                     {
-                        ConsoleEx.Write("Ważne: Tak", ConsoleColor.Magenta);
+                        ConsoleEx.Write("Important: Yes", ConsoleColor.Magenta);
                     }
                     else
                     {
-                        ConsoleEx.Write("Ważne: Nie", ConsoleColor.Magenta);
+                        ConsoleEx.Write("Important: No", ConsoleColor.Magenta);
                     }
 
                     Console.WriteLine();
@@ -127,16 +127,16 @@ namespace TaskManager
             }
         }
         /// <summary>
-        /// Usunięcie zadania z listy
+        /// Delete task from list
         /// </summary>
-        /// <param name="list"> lista zadań </param>
+        /// <param name="list"> task list </param>
         public void DeleteTask(List<TaskModel> list)
         {
             try
             {
                 int ind = int.Parse(Console.ReadLine());
                 list.RemoveAt(ind - 1);
-                ConsoleEx.WriteLine("Pomyślnie usunięto wpis", ConsoleColor.Red);
+                ConsoleEx.WriteLine("Successfully deleted", ConsoleColor.Red);
             }
             catch (Exception ex)
             {
@@ -144,9 +144,9 @@ namespace TaskManager
             }
         }
         /// <summary>
-        /// Zapis zadań z listy do pliku
+        /// Save task to list
         /// </summary>
-        /// <param name="list"> lista zadań </param>
+        /// <param name="list"> task list </param>
         public void SaveTasks(List<TaskModel> list)
         {
             try
@@ -156,11 +156,11 @@ namespace TaskManager
                 foreach (var element in list)
                 {
                     string save =
-                        $"{element.Opis};{element.Start.ToString()};{element.Koniec.ToString()};{element.Allday.ToString()};{element.Important.ToString()}\n";
+                        $"{element.Description};{element.Start.ToString()};{element.End.ToString()};{element.Allday.ToString()};{element.Important.ToString()}\n";
                     File.AppendAllText(file, save);
                 }
 
-                ConsoleEx.WriteLine("Pomyslnie zapisano wpisy", ConsoleColor.Green);
+                ConsoleEx.WriteLine("Successfully saved", ConsoleColor.Green);
             }
             catch (Exception ex)
             {
@@ -169,9 +169,9 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Ładowanie zadań z pliku do listy
+        /// Loading tasks to list
         /// </summary>
-        /// <returns> Zwrotka listy TaskModel </returns>
+        /// <returns> TaskModel list </returns>
         public List<TaskModel> LoadTasks()
         {
             List<TaskModel> taskList = new List<TaskModel>();
@@ -182,15 +182,15 @@ namespace TaskManager
                 foreach (var element in fileTab)
                 {
                     string[] taskInfo = element.Split(";");
-                    Opis = taskInfo[0];
+                    Description = taskInfo[0];
                     Start = Convert.ToDateTime(taskInfo[1]);
                     if (taskInfo[2] != "" && taskInfo[2] != null)
                     {
-                        Koniec = Convert.ToDateTime(taskInfo[2]);
+                        End = Convert.ToDateTime(taskInfo[2]);
                         Allday = false;
                     }
 
-                    Koniec = null;
+                    End = null;
                     Allday = true;
                     if (taskInfo[4] == "True")
                     {
@@ -201,16 +201,15 @@ namespace TaskManager
                     {
                         Important = false;
                     }
+                    TaskModel task = new TaskModel(Description, Start, End, Allday, Important);
+                    taskList.Add(task);
                 }
+                ConsoleEx.WriteLine("Successfully loaded", ConsoleColor.Green);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-            TaskModel task = new TaskModel(Opis, Start, Koniec, Allday, Important);
-            taskList.Add(task);
-            ConsoleEx.WriteLine("Pomyślnie wczytano wpisy", ConsoleColor.Green);
             return taskList;
 
 

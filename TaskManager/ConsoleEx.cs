@@ -3,7 +3,7 @@
 namespace TaskManager
 {
     /// <summary>
-    /// Statyczna klasa pozwalajaca zmienic kolor tekstu w konsoli
+    /// Static class written to change text color in console
     /// </summary>
     public static class ConsoleEx
     {
