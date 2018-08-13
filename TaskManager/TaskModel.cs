@@ -8,11 +8,11 @@ namespace TaskManager
 {
     public class TaskModel
     {
-        public string Description;
-        public DateTime Start;
-        public DateTime? End;
-        public bool Allday;
-        public bool Important;
+        public string Description { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime? End { get; set; }
+        public bool Allday { get; set; }
+        public bool Important { get; set; }
 
         public TaskModel(string description, DateTime start, DateTime? end, bool allday, bool important)
         {

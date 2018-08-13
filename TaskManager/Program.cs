@@ -5,7 +5,7 @@ namespace TaskManager
 {
     class Program
     {
-        public static List<TaskModel> list = new List<TaskModel>();
+        static List<TaskModel> list = new List<TaskModel>();
         /// <summary>
         /// Menu with commands
         /// </summary>
