@@ -4,7 +4,7 @@ Simple Task Manager written in C# that supports:
 
 * Adding tasks
 * Deleting tasks
-* Displaying task list
+* Displaying list of tasks
 * Save list to file 
 * Load list from file
 
