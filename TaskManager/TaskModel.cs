@@ -31,7 +31,7 @@ namespace TaskManager
         /// <summary>
         /// Adding task to TaskModel
         /// </summary>
-        /// <returns> return TaskModel object </returns>
+        /// <returns> TaskModel object </returns>
         public TaskModel AddTask()
         {
             bool validation = false;
@@ -87,7 +87,7 @@ namespace TaskManager
         /// <summary>
         /// Display task list in console
         /// </summary>
-        /// <param name="list">TaskModel list</param>
+        /// <param name="list"> TaskModel list </param>
         public void ShowTasks(List<TaskModel> list)
         {
             try
